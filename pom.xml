@@ -20,6 +20,13 @@
         <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
     </properties>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
             <!-- AsciiDoctor Maven Plugin -->
@@ -72,6 +79,28 @@
                         <goals>
                             <goal>process-asciidoc</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.aim42.htmlSanityCheck</groupId>
+                <artifactId>htmlSanityCheck-maven-plugin</artifactId>
+                <version>wip~jitpack-new-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>sanity-check-generated-docs</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sanity-check</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDir>${project.build.directory}/generated-docs</sourceDir>
+                            <failOnErrors>true</failOnErrors>
+                            <excludes>
+                                <exclude>https://dzone\.com/articles/state-of-gradle-java-9-support.*</exclude>
+                                <exclude>https://dzone\.com/articles/migrating-a-spring-boot-application-to-java-9-comp</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
