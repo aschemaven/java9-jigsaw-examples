@@ -1,0 +1,9 @@
+/*
+ * Whitebox test patch for modfib module.
+ * Allows test code to access the non-exported pkgfib.internal package.
+ */
+patch-module modfib {
+    add-modules TEST-MODULE-PATH;
+    add-reads TEST-MODULE-PATH;
+    add-exports pkgfib.internal to ALL-UNNAMED;
+}

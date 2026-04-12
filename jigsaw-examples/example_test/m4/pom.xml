@@ -48,7 +48,19 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>4.0.0-beta-3</version>
+        <version>4.0.0-beta-4</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.5</version>
+        <configuration>
+          <!-- Module Source Hierarchy nests classes under target/(test-)classes/<module>/ -->
+          <classesDirectory>${project.build.outputDirectory}/modfib</classesDirectory>
+          <testClassesDirectory>${project.build.testOutputDirectory}/modfib</testClassesDirectory>
+          <useModulePath>true</useModulePath>
+          <argLine>--add-reads modfib=ALL-UNNAMED --add-exports modfib/pkgfib.internal=ALL-UNNAMED --add-opens modfib/pkgfib=ALL-UNNAMED --add-opens modfib/pkgfib.internal=ALL-UNNAMED</argLine>
+        </configuration>
       </plugin>
     </plugins>
   </build>
