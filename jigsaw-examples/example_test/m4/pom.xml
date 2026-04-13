@@ -15,18 +15,18 @@
   </properties>
 
   <dependencies>
-    <!-- JUnit 4 for testing (will be downloaded to amlib) -->
+    <!-- JUnit 4 API for test sources (compatible with both legacy and m4 builds) -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
-    <!-- Hamcrest (JUnit dependency) -->
+    <!-- JUnit Vintage engine runs JUnit 4 tests on JUnit Platform (surefire 3.6+) -->
     <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-core</artifactId>
-      <version>1.3</version>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.11.4</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -53,14 +53,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.5.5</version>
-        <configuration>
-          <!-- Module Source Hierarchy nests classes under target/(test-)classes/<module>/ -->
-          <classesDirectory>${project.build.outputDirectory}/modfib</classesDirectory>
-          <testClassesDirectory>${project.build.testOutputDirectory}/modfib</testClassesDirectory>
-          <useModulePath>true</useModulePath>
-          <argLine>--add-reads modfib=ALL-UNNAMED --add-exports modfib/pkgfib.internal=ALL-UNNAMED --add-opens modfib/pkgfib=ALL-UNNAMED --add-opens modfib/pkgfib.internal=ALL-UNNAMED</argLine>
-        </configuration>
+        <version>3.6.0-SNAPSHOT</version>
       </plugin>
     </plugins>
   </build>
